@@ -50,6 +50,8 @@ function adminmodeAction(){
 function adminmodeAction_on(){
 	var password  = $("#pw").val();
 	
+	if(password != "Tess201428"){ alert("인증 실패하였습니다."); }
+	
 	if(password != null){
 		location.href="Admin?password="+password;
 		
@@ -193,7 +195,7 @@ function adminmodeAction_on(){
 		            <li data-icon="false" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="d" class="ui-btn ui-li ui-btn-hover-d">
 		             	<div class="ui-btn-inner ui-li ">
 		             		<div class="ui-btn-text">
-		                		<a href="" class="left-li"  data-ajax="false">Q&A</a>
+		                		<a href="mailto:woduf@nate.com" class="left-li"  data-ajax="false">Q&A</a>
 		            		</div>
 		            	</div>
 		            </li>
@@ -293,7 +295,6 @@ function adminmodeAction_on(){
 	
 	<!--  bbs view ------------------------------------------------------------------------------------------------>
 	<% for (int i=0; i < list.size(); i++){ bean = (BbsBean) list.get(i); %>
-	
 	<div data-role="page" class="view view" id="bbs_view_<%=bean.getSeq()%>">
 		<div data-role="header" class="header <%=grp%>" data-theme="c" >
 			
@@ -409,7 +410,7 @@ function adminmodeAction_on(){
 							</div>
 						</div>
 						<div class="ui-block-b"  style="width: 50%;">
-							<a  onclick="javascript:check_fun()" data-role="button" class="button_width" ><img src="./images/Confirm_ico.gif" class="ico_img"></a>
+							<a  onclick="javascript:noticeInsterForm.submit();" data-role="button" class="button_width" ><img src="./images/Confirm_ico.gif" class="ico_img"></a>
 						</div>
 					</div>
 				</div>

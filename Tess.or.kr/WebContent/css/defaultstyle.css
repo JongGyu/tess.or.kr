@@ -136,6 +136,12 @@ a:link,a:visited,a:active,a:hover {
 	font-size:160%;
 }
 
+.humor_title_text {
+	font-family: Georgia,dotum,'µ¸¿ò',"Time New Roman",serif;
+	color:#d2322d;
+	font-size:160%;
+}
+
 .schedule_title_text {
 	font-family: Georgia,dotum,'µ¸¿ò',"Time New Roman",serif;
 	color:#FFA300;
@@ -191,7 +197,7 @@ a:link,a:visited,a:active,a:hover {
 .humor_text {
 	font-family: Georgia,dotum,'µ¸¿ò',"Time New Roman",serif;
 	color:#d2322d;
-	font-size:160%;
+	font-size:90%;
 }
 
 .mainImage {
