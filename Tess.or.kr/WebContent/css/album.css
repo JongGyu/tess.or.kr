@@ -1,0 +1,84 @@
+.all_album {
+	width: 30%;
+	min-height: 90px;
+	height: 18%;
+	border: 1px #FF9191 solid;
+	margin: 10%;
+	float:left;
+	
+	box-shadow: 8px 8px rgba(0, 0, 0, .2);
+	transition: top 0.1s cubic-bezier(0, 0.5, 0.5, 1), left 0.1s
+		cubic-bezier(0, 0.5, 0.5, 1), box-shadow 0.1s
+		cubic-bezier(0, 0.5, 0.5, 1);
+}
+
+.all_album img {
+	width: 100%;
+	max-width:760px;
+	min-height: 90px;
+	height:100%;
+	max-height: 360px;
+	vertical-align: middle;
+	
+}
+
+.album_view {
+	background: #000;
+	border-color: #000;
+}
+
+.album_view_img {
+	position:absolute; top:50%; height:240px; margin-top:-120px; /* negative half of the height */
+	z-index: 999;
+}
+
+.album_footer {
+	background: #000;
+}
+
+
+.al_ul li {
+	text-align:center;
+	line-height:50px;
+	border: 1px #B3B3B3 dotted;
+	margin: 10px;
+	width: 25%;
+	min-height: 50px;
+	height:100%;
+	max-height: 1025px;
+	float: left;
+	background-color: rgba(233, 233, 233, 0.07);
+	font-size:200%;
+	color: #B3B3B3;
+	
+}
+
+.hiddenfile {
+	font-size: 0px;
+	width: 0px;
+	height: 0px;
+}
+
+.al_title { 
+	bacgkround:#fff;
+	height:40px;
+	line-height: 40px;
+	text-indent: 10px;
+	display: block;
+	border:1px #FF9191 solid;
+	-webkit-border-radius:8px;
+	-webkit-box-shadow:1px 1px 2px #666;
+	margin-bottom:8px;
+
+}
+
+.al_title .al_text {
+	color: #FF9191;
+	font-size:75%;
+}
+
+.album_title {
+	background:#fff;
+	color:#BEBEBE;
+	font-size:70%;
+}

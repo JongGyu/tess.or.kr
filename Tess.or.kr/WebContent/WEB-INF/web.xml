@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>www</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>BbsServlet</servlet-name>
+    <servlet-class>Controller.BbsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BbsServlet</servlet-name>
+    <url-pattern>/BbsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <servlet-class>Controller.ScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <url-pattern>/ScheduleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AlbumServlet</servlet-name>
+    <servlet-class>Controller.AlbumServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AlbumServlet</servlet-name>
+    <url-pattern>/AlbumServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Admin</servlet-name>
+    <servlet-class>Controller.Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Admin</servlet-name>
+    <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
+</web-app>
