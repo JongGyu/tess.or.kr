@@ -139,6 +139,16 @@ function adminmodeAction_on(){
 				        <span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
 			        </div>
 		        </li>
+		        <li data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-icon-arrow-r">
+			        <div class="ui-btn-inner ui-li" aria-hidden="true">
+				        <div class="ui-btn-text">
+				          <a href="./sewol.jsp" class="ui-link-inherit" data-ajax="false">
+				            <h3 class="ui-li-heading content_text" style="color: #333;">세월호</h3>
+				          </a>
+				        </div>
+				        <span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+			        </div>
+		        </li>
 		     </ul>
 		     
 		     
@@ -213,6 +223,15 @@ function adminmodeAction_on(){
 		            		</div>
 		            	</div>
 		            </li>
+		            
+		            <li data-icon="false" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="d" class="ui-btn ui-li ui-btn-hover-d">
+		             	<div class="ui-btn-inner ui-li ">
+		             		<div class="ui-btn-text">
+		                		<a href="./sewol.jsp"  class="left-li" data-ajax="false">세월호</a>
+		            		</div>
+		            	</div>
+		            </li>
+		            
             
         		</ul>
         	</div>
@@ -758,9 +777,8 @@ function adminmodeAction_on(){
 			<%for (int i=0; i < list.size(); i++){ bean = (AlbumBean) list.get(i); %>
 			<%if(bean.getTyp().equals("album")){ %>
 			<div class="all_album ">
-				<a href="#album_list_<%=bean.getOnlysubject()%>">
+				<a class="all_album_a" href="#album_list_<%=bean.getOnlysubject()%>">
 					<img src="./album/<%=bean.getPhotoname()%>">
-					<span class="album_title"><%=bean.getSubject() %></span>
 				</a>
 			</div>
 			<%} %>
@@ -800,7 +818,7 @@ function adminmodeAction_on(){
 			</a>
 			
 			<h1 class="ui-title" role="heading" aria-level="1">
-				<span class="album_title_text">봉사사진</span>
+				<span class="album_title_text"><%=bean.getSubject() %></span>
 			</h1>
 		</div>
 		
@@ -810,7 +828,7 @@ function adminmodeAction_on(){
 			<%if(bean.getTyp().equals("photo")){  %>
 			<%if(bean.getGrp().equals(GRP)) { %>
 			<div class="all_album ">
-				<a href="AlbumServlet?actionGroup=album&actionMode=LIST#photo_view_<%=bean.getSeq()%>" id="" > 
+				<a class="all_album_a" href="AlbumServlet?actionGroup=album&actionMode=LIST#photo_view_<%=bean.getSeq()%>" id="" > 
 					<img src="./album/<%=bean.getPhotoname()%>">
 				</a>
 			</div>

@@ -12,12 +12,18 @@
 		cubic-bezier(0, 0.5, 0.5, 1);
 }
 
+.all_album_a {
+	width: 30%;
+	min-height: 90px;
+	height: 18%;
+}
+
 .all_album img {
 	width: 100%;
-	max-width:760px;
+	max-width:360px;
 	min-height: 90px;
 	height:100%;
-	max-height: 360px;
+	
 	vertical-align: middle;
 	
 }
