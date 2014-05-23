@@ -226,6 +226,7 @@ public class AlbumImpl implements AlbumDao{
 		
 		Connection cn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		DBConnectionMgr db = DBConnectionMgr.getInstance();
 		
@@ -236,16 +237,18 @@ public class AlbumImpl implements AlbumDao{
 					"DELETE FROM album		"+
 					"WHERE seq = "+seq+"	";
 			
-			System.out.println(Dsql);
+			
 			ps =  cn.prepareStatement(Dsql);
-			res = ps.executeUpdate();
+			ps.executeUpdate();
+			
+			
 			
 			
 		} catch (Exception e){
 			e.printStackTrace();
 				
 		} finally {
-			db.freeConnection(cn, ps);
+			db.freeConnection(cn, ps, rs);
 		}
 			
 		

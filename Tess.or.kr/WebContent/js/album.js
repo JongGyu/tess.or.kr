@@ -85,10 +85,6 @@ function displayAsImage3(file, containerid, i, typ) {
 		}(img));
 		reader.readAsDataURL(file);
 	}
-	
-	
-	
-	
 	excelupload(i, typ);
 	
 }

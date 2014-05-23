@@ -163,6 +163,8 @@ public class AlbumServlet extends HttpServlet {
 			AlbumImpl bi = new AlbumImpl();
 			bi.aDelete(seq);
 			
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/AlbumServlet?actionMode=LIST");
 			rd.forward(request, response);
 

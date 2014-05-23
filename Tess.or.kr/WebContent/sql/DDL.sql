@@ -13,8 +13,6 @@ CREATE TABLE bbs(
 	regdate date
 );
 
-
-
 CREATE TABLE calendar(
 	seq	int not null primary key auto_increment,
 	subject varchar(200) not null,

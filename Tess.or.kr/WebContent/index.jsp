@@ -21,20 +21,30 @@
 <html>
 <head>
 <meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta charset="EUC-KR"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="./css/jquery.mobile-1.4.0.css" />
 <link rel="stylesheet" href="./css/calendar.css" />
 <link rel="stylesheet" href="./css/album.css" />
 <link rel="stylesheet" href="./css/defaultstyle.css" />
-
 <script src="./js/jquery-1.7.2.min.js"></script>
 <script src="./js/jquery.mobile-1.4.0.min.js"></script> 
 <script src="./js/calendar.js"></script>
 <script src="./js/album.js"></script>
 <script src="./js/jquery.form.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+	var WshShell = new ActiveXObject("WScript.Shell");
+    Desktoptemp = WshShell.Specialfolders("Desktop");
+    var sName = WshShell.CreateShortcut(Desktoptemp + "Tess.url");
+    sName.TargetPath = "http://tess.or.kr/";
+    sName.Save();
+	
+	
+});
+
 window.addEventListener("load",function(){
  setTimeout(scrollTo,0,0,1);
  },false);
@@ -79,7 +89,7 @@ function adminmodeAction_on(){
 			</a>
 					
 			<h1 class="ui-title" role="heading" aria-level="1">
-				<span class="logo_text_big"><a href="#main" style="color:#00A551 " data-ajax="false">TESS</a></span>
+				<span class="logo_text_big"><a href="./index.jsp" style="color:#00A551 " data-ajax="false">TESS</a></span>
 			</h1>
 		</div>
 		
@@ -87,7 +97,7 @@ function adminmodeAction_on(){
 			
 			<div class="mainImage">
 				<a onclick="javascript:adminmodeAction();">
-					<img class="main_img" src="./images/logo_tess.gif" border="0">
+					<img class="main_img" src="./images/sewol_main.jpg" border="0">
 				</a>
 			</div>
 			
@@ -421,7 +431,7 @@ function adminmodeAction_on(){
 				<div class="br_tool">
 					<div class="ui-grid-a" style="width: 100%;">
 						<div class="ui-block-a " style="width: 50%;">
-							<a  id="chooseFile" data-role="button" class="button_width"><img src="./images/Photo_ico.gif" class="ico_img"></a>
+							<a  id="chooseFile" onclick="javscript:chooseFileFunction()" data-role="button" class="button_width"><img src="./images/Photo_ico.gif" class="ico_img"></a>
 							
 							
 							<div class="hiddenfile" style="width: 0px; height: 0px;">
@@ -438,12 +448,13 @@ function adminmodeAction_on(){
 		</form>
 	</div>
 	<script>
+	function chooseFileFunction(){
+		$("#imgFile").trigger("click");
+	}
+	
+	
+	
 	$(document).ready(function(){ 
-		$("#chooseFile").click(function(e){
-			e.preventDefault();
-			$("#imgFile").trigger("click");
-		});
-		
 		$("#imgFile").change(function(){
 			var file = $("#imgFile")[0].files[0];            
 			$("#preview").empty();
@@ -504,7 +515,7 @@ function adminmodeAction_on(){
 				<br/>
 				<div class="br_content">
 					<label for="br_content">내용</label>
-					<textarea  name="in_content" id="br_content"><%=bean.getContent()%></textarea>
+					<textarea  name="in_content" id="br_content"><%=bean.getContent().replaceAll("<br>", "\r\n")%></textarea>
 					
 					
 					<div id="preview_<%=bean.getSeq()%>">
@@ -518,12 +529,12 @@ function adminmodeAction_on(){
 				<div class="br_tool">
 					<div class="ui-grid-a" style="width: 100%;">
 						<div class="ui-block-a " style="width: 50%;">
-							<a  id="chooseFile_<%=bean.getSeq()%>" data-role="button" class="button_width">
+							<a  id="chooseFile_<%=bean.getSeq()%>" onclick="javascript:chooseFile_<%=bean.getSeq()%>Function();" data-role="button" class="button_width">
 								<img src="./images/Photo_ico.gif" class="ico_img">
 							</a>
 							
 							<div class="hiddenfile" style="width: 0px; height: 0px;">
-								<input type="file" id="imgFile_<%=bean.getSeq()%>" data-clear-btn="false" name="fileimg" accept="image/*" capture>
+								<input type="file" id="imgFile_<%=bean.getSeq()%>" onchange="javascript:imgFile_<%=bean.getSeq()%>Function();" data-clear-btn="false" name="fileimg" accept="image/*" capture>
 							</div>
 						</div>
 						<div class="ui-block-b"  style="width: 50%;">
@@ -539,19 +550,15 @@ function adminmodeAction_on(){
 		</form>
 	</div>
 	<script>
-	$(document).ready(function(){ 
-		$("#chooseFile_<%=bean.getSeq()%>").click(function(e){
-			e.preventDefault();
-			$("#imgFile_<%=bean.getSeq()%>").trigger("click");
-		});
-		
-		$("#imgFile_<%=bean.getSeq()%>").change(function(){
-			var file = $("#imgFile_<%=bean.getSeq()%>")[0].files[0];            
-			$("#preview_<%=bean.getSeq()%>").empty();
-			displayAsImage3(file, "preview_<%=bean.getSeq()%>");
-		});
-	});
-    
+	function chooseFile_<%=bean.getSeq()%>Function(){
+		$("#imgFile_<%=bean.getSeq()%>").trigger("click");
+	}
+	
+	function imgFile_<%=bean.getSeq()%>Function(){
+		var file = $("#imgFile_<%=bean.getSeq()%>")[0].files[0];            
+		$("#preview_<%=bean.getSeq()%>").empty();
+		displayAsImage3(file, "preview_<%=bean.getSeq()%>");
+	}
 	
     function displayAsImage3(file, containerid) {
 		if (typeof FileReader !== "undefined") {
@@ -1022,7 +1029,7 @@ function adminmodeAction_on(){
 <script type="text/javascript">
 $(window).load(function(){
 	$('html').css("overflow", "hiddden");
-	$("#background").fullBg();
+	
 });
 </script>
 </html>

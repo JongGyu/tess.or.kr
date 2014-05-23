@@ -1,9 +1,13 @@
+
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -244,6 +248,25 @@
 
 </style>
 <script type="text/javascript">
+
+function messageWriteFunction(){
+	
+	if($("#name").val() == ""){
+		alert("이름을 입력해주세요");
+		$("#name").focus();
+		
+	}  else {
+		
+		messageWrite.submit();
+	}
+	
+	
+
+   
+     
+}
+
+
 $(document).ready(function(){
 	$("#people-search").keyup(function(){
 		
@@ -279,31 +302,8 @@ $(document).ready(function(){
 
 
 
-//파일 업로드 호출 스크립트
-function messageWrite(){
-     goExcelUploadAjaxLoad();  // 백그라운드 로드시킬 스크립트 호출
-   
-   	 var frm = $("#messageWrite");
-	 frm.attr("action", "./sewoolAction.jsp");
-	 frm.submit();
-     
-}
 
-function goExcelUploadAjaxLoad(i, typ) {
-     $(document).ajaxError(function(info, xhr) {
-          if (xhr.status == 500)
-               alert("error.");
-          });
 
-          $(function() {
-        	
-        	  var vForm = $("#messageWrite");        		  
-        	 vForm.ajaxForm(FileuploadCallback);  // 완료 후 콜백 함수 호출
-        	  
-        	 
-          });
-        
-}
 
 
 
@@ -352,22 +352,25 @@ function goExcelUploadAjaxLoad(i, typ) {
 				</div>
 				<br>
 				<br>
+				
+				
 				<div class="content_header">
 					
 					<p class="title">'세월호' 실종자들의 무사귀환을 기원합니다.</p>
 					
-					<table class="content_header_people">
-						<tr>
-							<th>구조자</th>
-							<th>실종자</th>
-							<th>사망자</th>
-						</tr>
-						<tr>
-							<td class="people_save">174</td>
-							<td class="people_lost">238</td>
-							<td class="people_die">64</td>
-						</tr>
-					</table>
+<!-- 					<table class="content_header_people"> -->
+<!-- 						<tr> -->
+<!-- 							<th>구조자</th> -->
+<!-- 							<th>실종자</th> -->
+<!-- 							<th>사망자</th> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td class="people_save">174</td> -->
+<!-- 							<td class="people_lost">181</td> -->
+<!-- 							<td class="people_die">121</td> -->
+													
+<!-- 						</tr> -->
+<!-- 					</table> -->
 				</div>
 				
 				<div>
@@ -601,25 +604,8 @@ function goExcelUploadAjaxLoad(i, typ) {
 			</section>
 			
 		</div>
-		<%
-			Connection cn = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			
-			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				cn = DriverManager.getConnection("jdbc:mysql://tess.or.kr:3306/tessteam", "tessteam", "Ghksrud201428");
-				
-				
-					String sql = 
-							"SELECT seq, name, content, regdate	"+
-							"FROM SEWOL_MESSAGE					"+
-							"GROUP BY seq DESC LIMIT 10			";
-						
-					
-					ps = cn.prepareStatement(sql);
-					rs = ps.executeQuery();
-		%>		
+		
+		
 			
 		<div data-role="page" id="message">
 			
@@ -654,7 +640,25 @@ function goExcelUploadAjaxLoad(i, typ) {
 				<div>
 					<img src="./sewol/message_cover.jpg" class="screen_img" >
 					
+					<%
+		 			Connection cn = null;
+					PreparedStatement ps = null;
+		 			ResultSet rs = null;
 					
+		 			try{
+		 				Class.forName("com.mysql.jdbc.Driver");
+		 				cn = DriverManager.getConnection("jdbc:mysql://tess.or.kr:3306/tessteam", "tessteam", "Ghksrud201428");
+						
+						
+							String sql = 
+									"SELECT seq, name, content, regdate	"+
+									"FROM SEWOL_MESSAGE					"+
+									"GROUP BY seq DESC LIMIT 10			";
+								
+							
+							ps = cn.prepareStatement(sql);
+							rs = ps.executeQuery();
+					%>		
 					<div>
 						<% while(rs.next()){%>
 						<ul class="message_ul">
@@ -663,15 +667,27 @@ function goExcelUploadAjaxLoad(i, typ) {
 						</ul>
 						<%} %>
 					</div>
+					<%
+				
+						} catch (Exception e){
+							e.printStackTrace();
+							
+						} finally {
+							rs.close();
+							ps.close();
+							cn.close();  
+						}
+					
+					%>
 					<br>
 					<br>
 					<div class="write">
-						<form name="messageWrite" action="./sewoolAction.jsp" method="post" data-ajax="false">
+						<form name="messageWrite" action="./sewoolAction.jsp"  method="post" data-ajax="false">
 							<p class="messageTitle">희망의 메세지 남기기..</p>
 							
 							<input type="text" name="name" id="name"  placeholder="Name"/>
 							<textarea name="content" id="content"></textarea>
-							<button onclick="javascript:messageWrite.submit();"  data-role="button">보내기</button>
+							<input type="button" onclick="javascript:messageWriteFunction();"  data-role="button" value="보내기">
 						</form>
 					</div>
 					
@@ -683,18 +699,7 @@ function goExcelUploadAjaxLoad(i, typ) {
 				
 				
 		</div>
-		<%
-				
-			} catch (Exception e){
-				e.printStackTrace();
-				
-			} finally {
-				rs.close();
-				ps.close();
-				cn.close();  
-			}
 		
-		%>
 	</div>
 	
 	
